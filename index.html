@@ -76,24 +76,29 @@ flex-wrap:wrap;
 }
 
 button{
-width:150px;
-height:150px;
+width:110px;
+height:110px;
 border-radius:50%;
 border:none;
 background:#ff6b81;
 color:white;
-font-size:15px;
-padding:16px;
+font-size:13px;
+padding:12px;
 cursor:pointer;
-transition:.3s;
+text-align:center;
+line-height:1.2;
+transition:width .35s ease,height .35s ease,transform .2s ease;
 }
 
 button:disabled{
-background:#ffc6d6;
+background:#FF4D6D;
 cursor:not-allowed;
 }
 
-.maybe{background:#ffb3c6}
+.maybe{
+background:#F8BBD0;
+color:#444;
+}
 
 .glow{
 animation:pulse 1.5s infinite;
@@ -182,7 +187,8 @@ Hey Ms Spontaneous… the bunny has been looking for you.
 
 let step=0
 let attempts=0
-let size=150
+let yesSize=100
+let maybeSize=100
 
 const story=[
 {text:"The bunny 🐇 was hopping through a hiking trail ⛰️ when it discovered chocolates 🍫.",btn:"Wait… chocolates?"},
@@ -220,7 +226,7 @@ storyBox.classList.add("small")
 if(attempts>=3){
 
 buttons.innerHTML=`
-<button class="glow" id="bigYes" onclick="yes()" style="width:230px;height:230px">
+<button class="glow" id="bigYes" onclick="yes()" style="width:${yesSize}px;height:${yesSize}px">
 YES, YES, YES, I would love to...OMG I'm sooo excited!
 </button>
 `
@@ -231,26 +237,27 @@ return
 let glow=attempts>0?"glow":""
 
 buttons.innerHTML=`
-<button class="maybe" onmouseover="run(this)" onclick="maybe()">Maybe later 😅</button>
-<button disabled class="${glow}" style="width:${size}px;height:${size}px">Yes… I'd love to 🐇</button>
+<button class="maybe" style="width:${maybeSize}px;height:${maybeSize}px" onclick="maybe()">Maybe later 😅</button>
+<button disabled class="${glow}" style="width:${yesSize}px;height:${yesSize}px">Yes… I'd love to 🐇</button>
 `
 
 }
 
 function maybe(){
+
 attempts++
-size+=40
+
+yesSize += 30
+maybeSize -= 20
+
+if(maybeSize < 50){
+maybeSize = 50
+}
+
 renderButtons()
-}
-
-function run(btn){
-
-let x=Math.random()*200-100
-let y=Math.random()*200-100
-
-btn.style.transform=`translate(${x}px,${y}px)`
 
 }
+
 
 function flowerBurst(x,y){
 
@@ -281,7 +288,7 @@ function yes(){
 
 let rect=document.getElementById("bigYes").getBoundingClientRect()
 
-flowerBurst(rect.left+100,rect.top+100)
+flowerBurst(rect.left+rect.width/2,rect.top+rect.height/2)
 
 storyBox.innerHTML=
 "Yayyy... you just made the bunny very happy 🐇<br><br>"+
@@ -304,6 +311,7 @@ e.innerHTML=items[Math.floor(Math.random()*items.length)]
 e.style.left=Math.random()*100+"%"
 e.style.fontSize=(Math.random()*20+18)+"px"
 e.style.animationDuration=(Math.random()*4+4)+"s"
+
 document.body.appendChild(e)
 
 }
@@ -329,8 +337,8 @@ setInterval(()=>move(b),1500)
 
 function move(b){
 
-b.style.left=Math.random()*360+"px"
-b.style.top=Math.random()*780+"px"
+b.style.left=Math.random()*90+"vw"
+b.style.top=Math.random()*85+"vh"
 
 }
 
