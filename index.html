@@ -37,6 +37,12 @@ overflow:hidden;
 100%{background-position:0% 50%}
 }
 
+@keyframes floatContainer{
+0%{ transform:translateY(-10vh) }
+50%{ transform:translateY(-12vh) }
+100%{ transform:translateY(-10vh) }
+}
+
 .container{
 background:white;
 width:85%;
@@ -46,6 +52,7 @@ text-align:center;
 box-shadow:0 20px 60px rgba(0,0,0,0.2);
 z-index:10;
 transform:translateY(-10vh);
+animation:floatContainer 4s ease-in-out infinite;
 }
 
 h1{color:#ff4d6d;margin-top:0}
@@ -54,6 +61,11 @@ h1{color:#ff4d6d;margin-top:0}
 font-size:17px;
 min-height:110px;
 margin-bottom:20px;
+}
+
+.story.small{
+font-size:14px;
+line-height:1.4;
 }
 
 .buttons{
@@ -202,6 +214,8 @@ step++
 }
 
 function renderButtons(){
+
+storyBox.classList.add("small")
 
 if(attempts>=3){
 
