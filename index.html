@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>For Ms Spontaneous 🐰</title>
 
 <style>
@@ -10,7 +10,7 @@
 html,body{
 margin:0;
 padding:0;
-height:100dvh;
+height:100%;
 overflow:hidden;
 font-family:-apple-system,system-ui;
 background:#ffd1dc;
@@ -21,9 +21,9 @@ width:393px;
 height:852px;
 margin:auto;
 display:flex;
-flex-direction:column;
-align-items:center;
+align-items:flex-start;
 justify-content:center;
+padding-top:30vh;
 background:linear-gradient(135deg,#ffd1dc,#ffe4e1,#fbc2eb,#fad0c4);
 background-size:500% 500%;
 animation:bg 18s infinite;
@@ -45,6 +45,7 @@ border-radius:24px;
 text-align:center;
 box-shadow:0 20px 60px rgba(0,0,0,0.2);
 z-index:10;
+transform:translateY(-10vh);
 }
 
 h1{color:#ff4d6d;margin-top:0}
@@ -63,10 +64,8 @@ flex-wrap:wrap;
 }
 
 button{
-width:32vw;
-height:32vw;
-max-width:180px;
-max-height:180px;
+width:150px;
+height:150px;
 border-radius:50%;
 border:none;
 background:#ff6b81;
@@ -226,7 +225,7 @@ buttons.innerHTML=`
 
 function maybe(){
 attempts++
-size+=30
+size+=40
 renderButtons()
 }
 
