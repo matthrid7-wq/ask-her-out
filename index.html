@@ -73,6 +73,7 @@ display:flex;
 justify-content:center;
 gap:14px;
 flex-wrap:wrap;
+position:relative;
 }
 
 button{
@@ -227,7 +228,8 @@ if(attempts>=3){
 
 buttons.innerHTML=`
 <button class="glow" id="bigYes" onclick="yes()" style="width:${yesSize}px;height:${yesSize}px">
-YES, YES, YES, I would love to...OMG I'm sooo excited!!!💃🏼😽💃🏼</button>
+YES, YES, YES, I would love to...OMG I'm sooo excited!!!💃🏼😽💃🏼
+</button>
 `
 
 return
@@ -236,15 +238,19 @@ return
 let glow=attempts>0?"glow":""
 
 buttons.innerHTML=`
-<button class="maybe" style="width:${maybeSize}px;height:${maybeSize}px" onclick="maybe()">Maybe later 😅</button>
+<button class="maybe" style="width:${maybeSize}px;height:${maybeSize}px" onclick="maybe(event)">Maybe later 😅</button>
 <button disabled class="${glow}" style="width:${yesSize}px;height:${yesSize}px">Yes… I'd love to 😻</button>
 `
 
 }
 
-function maybe(){
+function maybe(e){
 
 attempts++
+
+if(attempts < 3){
+moveMaybe(e)
+}
 
 yesSize += 30
 maybeSize -= 20
@@ -257,6 +263,22 @@ renderButtons()
 
 }
 
+function moveMaybe(e){
+
+let btn = e.target
+let container = document.querySelector(".app")
+
+let maxX = container.clientWidth - btn.offsetWidth - 20
+let maxY = container.clientHeight - btn.offsetHeight - 20
+
+let x = Math.random() * maxX
+let y = Math.random() * maxY
+
+btn.style.position = "absolute"
+btn.style.left = x + "px"
+btn.style.top = y + "px"
+
+}
 
 function flowerBurst(x,y){
 
